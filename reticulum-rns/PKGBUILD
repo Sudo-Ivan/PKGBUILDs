@@ -1,0 +1,23 @@
+# Maintainer: Sudo-Ivan LXMF:3832c4ec19ac161a6c6e18baa5cff5cb
+pkgname=reticulum-rns
+pkgver=0.8.8
+pkgrel=1
+pkgdesc="The cryptography-based networking stack for building unstoppable networks with LoRa, Packet Radio, WiFi and everything in between."
+arch=('any')
+url="https://github.com/markqvist/RNS"
+license=('MIT')
+depends=('python' 'python-pip')
+makedepends=('python-build' 'python-installer' 'python-wheel')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/markqvist/Reticulum/archive/0.8.8.tar.gz")
+sha256sums=('be0c5eb9cd323146710f7d713ed73cc623f4ba7fea51f058b8758f804bec6a83')
+
+build() {
+    cd "Reticulum-$pkgver"
+    python -m build --wheel --no-isolation
+}
+
+package() {
+    cd "Reticulum-$pkgver"
+    python -m installer --destdir="$pkgdir" dist/*.whl
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+} 

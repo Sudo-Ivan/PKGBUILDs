@@ -1,0 +1,23 @@
+# Maintainer: Sudo-Ivan LXMF:3832c4ec19ac161a6c6e18baa5cff5cb
+pkgname=reticulum-lxmf
+pkgver=0.5.8
+pkgrel=1
+pkgdesc="A universal, distributed and secure messaging protocol for Reticulum"
+arch=('any')
+url="https://github.com/markqvist/LXMF"
+license=('MIT')
+depends=('python' 'python-pip' 'reticulum-rns')
+makedepends=('python-build' 'python-installer' 'python-wheel')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/markqvist/LXMF/archive/0.5.8.tar.gz")
+sha256sums=('58cfdd00f99b6d6bf9fa674b6f8b3fb3cdc60ee52f8d0af5741be5c04ce9fdb9')
+
+build() {
+    cd "LXMF-$pkgver"
+    python -m build --wheel --no-isolation
+}
+
+package() {
+    cd "LXMF-$pkgver"
+    python -m installer --destdir="$pkgdir" dist/*.whl
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+} 

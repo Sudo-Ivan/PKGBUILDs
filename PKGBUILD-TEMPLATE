@@ -1,0 +1,21 @@
+# Maintainer: Sudo-Ivan LXMF:3832c4ec19ac161a6c6e18baa5cff5cb
+pkgname=
+pkgver=
+pkgrel=1
+pkgdesc=""
+arch=('any')
+url=""
+license=('')
+depends=('' '')
+makedepends=('' '' '')
+source=("$pkgname-$pkgver.tar.gz::")
+sha256sums=('SKIP')
+
+build() {
+    cd "$_pkgname-$pkgver"
+}
+
+package() {
+    cd "$_pkgname-$pkgver"
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
