@@ -1,0 +1,22 @@
+# Maintainer: Sudo-Ivan LXMF:3832c4ec19ac161a6c6e18baa5cff5cb
+pkgname=LXMFy
+pkgver=0.4.0
+pkgrel=1
+pkgdesc="Easily create LXMF bots for the Reticulum Network with this framework"
+arch=('any')
+url="https://github.com/lxmfy/LXMFy"
+license=('MIT')
+depends=('python' 'python-pip' 'reticulum-lxmf' 'reticulum-rns')
+makedepends=('python-build' 'python-installer' 'python-wheel')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/lxmfy/LXMFy/archive/v0.4.0.tar.gz")
+sha256sums=('014f3461c88781afa54cde9cc6b8dc6f18d780699d9c5177ff04f2c0ecfb257c')
+
+build() {
+    cd "LXMFy-$pkgver"
+    python -m build --wheel --no-isolation
+}
+
+package() {
+    cd "LXMFy-$pkgver"
+    python -m installer --destdir="$pkgdir" dist/*.whl
+} 
